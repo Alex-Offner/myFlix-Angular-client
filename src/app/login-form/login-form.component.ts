@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class LoginFormComponent {
 
-  @Input() userCredentials = { Username: '', Password: '' };
+  @Input() userCredentials = { username: '', password: '' };
 
   constructor(
     public fetchApiData: ApiDataService,
@@ -35,7 +35,7 @@ export class LoginFormComponent {
       localStorage.setItem('token', result.token);
       localStorage.setItem('user', JSON.stringify(result.user));
 
-      let successMessage = 'Successfully logged in ' + result.user.Username;
+      let successMessage = 'Successfully logged in ' + result.user.username;
       this.snackBar.open(successMessage, 'OK', {
         duration: 2000
       });
