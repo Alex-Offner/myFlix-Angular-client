@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 const token = localStorage.getItem('token');
 
 //Declaring the api url that will provide data for the client app
-const apiUrl = 'YOUR_HOSTED_API_URL_HERE/';
+const apiUrl = 'https://movie-app-alex-offner.herokuapp.com/';
 @Injectable({
   providedIn: 'root'
 })
