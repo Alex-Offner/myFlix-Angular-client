@@ -1,0 +1,29 @@
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.close:hover {
+    opacity: 0.5;
+}
+.header {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.button-wrapper {
+    margin: 10px 10px 10px 10px !important;
+    padding: 0;
+}
+
+.form-field {
+    width: 80%;
+}
+
+.warning {
+    color: rgba(185, 24, 24, 0.815);
+    padding-top: 8px;
+}

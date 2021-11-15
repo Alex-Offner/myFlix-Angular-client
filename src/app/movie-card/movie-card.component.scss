@@ -1,0 +1,67 @@
+.movie-card {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 60px 30px;
+    @media screen and (max-width: 500px) {
+      padding: 0;
+ }
+}
+
+.mat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 40px;
+    margin: 20px;
+    max-width: 300px;
+    width: 300px;
+    img {
+      max-width: 250px;
+    }
+    .mat-card-header {
+      text-align: center;
+    }
+    .mat-card-actions {
+      display: flex;
+      justify-content: space-evenly;
+      width: 100%;
+    }
+    .mat-button {
+        color: rgb(34, 159, 168);
+    }
+}
+
+.nav-bar {
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    background-color: #246edd;
+    color: #fff;
+    font-weight: 500;
+    font-size: 30px;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  .headline {
+    padding-top: 20px;
+  }
+  .nav-actions {
+    position: absolute;
+    top: 12px;
+    right: 50px;
+  }
+  .nav-btn {
+    border-radius: 4px;
+    height: 35px;
+    width: 80px;
+    margin-right: 12px;
+    line-height: 24px;
+  }
+  .nav-btn:hover {
+    color: black;
+  }

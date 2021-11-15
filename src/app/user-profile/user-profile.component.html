@@ -1,0 +1,54 @@
+<mat-card>
+
+    <mat-card-content (click)="close()" class="close">X</mat-card-content>
+
+    <mat-card-header class="header">
+        <mat-card-title>Your profile</mat-card-title>
+        <mat-card-subtitle>Username: {{data.user.username}}</mat-card-subtitle>
+        <mat-card-subtitle>Email: {{data.user.email}}</mat-card-subtitle>
+        <mat-card-subtitle>Birthday: {{data.user.birthday}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <p>Your favourite movies:</p>
+        - <span *ngFor="let move of data.favs; let i=index;">{{move.Title}} - </span>
+    </mat-card-content>
+
+    <mat-card-content>
+        <h2>Edit user data</h2>
+        <form>
+            <mat-form-field class="form-field">
+                <input matInput [(ngModel)]="userData.Username" placeholder='Username' type="text" name="Username"
+                    required>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <input matInput [(ngModel)]="userData.Password" type="password" placeholder="Password" name="Password"
+                    required>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <input matInput [(ngModel)]="userData.Email" type="email" placeholder='Email' name="Email" required>
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <input matInput [(ngModel)]="userData.Birthday" type="date" placeholder='Birthday' name="Birthday">
+            </mat-form-field>
+            <mat-card-actions class="button-wrapper">
+                <button mat-raised-button (click)="updateUser()" color="primary" type="submit">
+                    Save changes
+                </button>
+            </mat-card-actions>
+        </form>
+    </mat-card-content>
+
+    <mat-card-actions class="button-wrapper">
+        <button mat-raised-button (click)="deleteUser()" color="warn">
+            DELETE ACCOUNT
+        </button>
+        <p class="warning">DELETION IS IRREVERSIBLE!</p>
+    </mat-card-actions>
+
+    <!-- <mat-card-actions class="button-wrapper">
+        <button mat-raised-button (click)="goBack()" color="primary">
+            Close window
+        </button>
+    </mat-card-actions> -->
+</mat-card>
