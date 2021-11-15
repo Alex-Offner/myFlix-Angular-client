@@ -15,7 +15,7 @@ import { ApiDataService } from '../fetch-api-data.service';
 })
 export class UserProfileComponent {
 
-  @Input() userData = { Username: this.data.user.username, Password: '', Email: this.data.user.email, Birthday: (this.data.user.birthday ? this.data.user.birthday.split('T')[0] : undefined) };
+  @Input() userData = { username: this.data.user.username, password: '', email: this.data.user.email, birthday: (this.data.user.birthday ? this.data.user.birthday.split('T')[0] : undefined) };
   favMovies: any[] = [];
 
   constructor(
@@ -30,7 +30,7 @@ export class UserProfileComponent {
   }
 
   updateUser(): void {
-    this.fetchApiData.editUser(this.userData.Username, this.userData).subscribe((result) => {
+    this.fetchApiData.editUser(this.userData.username, this.userData).subscribe((result) => {
 
       localStorage.removeItem('token');
       localStorage.removeItem('user');
@@ -44,7 +44,7 @@ export class UserProfileComponent {
       window.open('/', '_self');
 
     }, (result) => {
-      console.log(this.favMovies);
+      console.log(this.userData);
       console.log(result);
       this.snackBar.open(result, 'OK', {
         duration: 4000
