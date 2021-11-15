@@ -11,7 +11,31 @@
 
     <mat-card-content>
         <p>Your favourite movies:</p>
-        - <span *ngFor="let move of data.favs; let i=index;">{{move.Title}} - </span>
+        <mat-card-subtitle>{{this.data.user.favouriteMovies}}</mat-card-subtitle>
+        <div class="favorites">
+            <mat-card *ngFor="let movie of favMovies">
+                <mat-card-header>
+                    <mat-card-title style="align-items: center">{{movie.Title}}</mat-card-title>
+                    <mat-card-subtitle>Directed by: {{ movie.Director.Name }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content><img src="{{ movie.ImagePath }}" alt="{{ movie.Title }}" /></mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary">
+                        Genre
+                    </button>
+                    <button mat-raised-button color="primary">
+                        Director
+                    </button>
+                    <button mat-raised-button color="primary">
+                        Synopsis
+                    </button>
+                    <!-- <button mat-icon-button color="warn">
+                        <mat-icon *ngIf="isFav(movie._id)">favorite</mat-icon>
+                        <mat-icon *ngIf="!isFav(movie._id)">favorite_border</mat-icon>
+                    </button> -->
+                </mat-card-actions>
+            </mat-card>
+        </div>
     </mat-card-content>
 
     <mat-card-content>
@@ -43,12 +67,6 @@
         <button mat-raised-button (click)="deleteUser()" color="warn">
             DELETE ACCOUNT
         </button>
-        <p class="warning">DELETION IS IRREVERSIBLE!</p>
+        <p class="warning">Deleting this account is permanent!</p>
     </mat-card-actions>
-
-    <!-- <mat-card-actions class="button-wrapper">
-        <button mat-raised-button (click)="goBack()" color="primary">
-            Close window
-        </button>
-    </mat-card-actions> -->
 </mat-card>

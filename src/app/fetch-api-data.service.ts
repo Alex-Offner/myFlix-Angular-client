@@ -104,13 +104,14 @@ export class ApiDataService {
     );
   }
 
-  getFavorites(): Observable<any> {
-    return this.http.get(apiUrl + 'users/:username/favouriteMovies/:MovieID', {
+  getFavorites(username: string): Observable<any> {
+    const response = this.http.get(apiUrl + 'users/' + username + '/favouriteMovies/', {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
-        })
-    }).pipe(
+        }),
+    });
+    return response.pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
@@ -128,13 +129,14 @@ export class ApiDataService {
     );
   }
 
-  editUser(userData: any): Observable<any> {
-    return this.http.put(apiUrl + 'users/:username', userData, {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        })
-    }).pipe(
+  public editUser(username: string, userData: object): Observable<any> {
+    const token = localStorage.getItem('token');
+    const response = this.http.put(apiUrl + 'users/' + username, userData, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+      }),
+    });
+    return response.pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );

@@ -15,15 +15,9 @@ import { ApiDataService } from '../fetch-api-data.service';
 })
 export class UserProfileComponent {
 
-  /**
-   * bind form input values to userData object and prefill form fields with data from {@link user}
-   */
-  @Input() userData = { Username: this.data.user.Username, Password: '', Email: this.data.user.Email, Birthday: (this.data.user.Birthday ? this.data.user.Birthday.split('T')[0] : undefined) };
+  @Input() userData = { Username: this.data.user.username, Password: '', Email: this.data.user.email, Birthday: (this.data.user.birthday ? this.data.user.birthday.split('T')[0] : undefined) };
+  favMovies: any[] = [];
 
-  /**
-    * All constructor items are documented as properties
-    * @ignore
-  */
   constructor(
     public fetchApiData: ApiDataService,
     public dialogRef: MatDialogRef<UserProfileComponent>,
@@ -31,11 +25,12 @@ export class UserProfileComponent {
     @Inject(MAT_DIALOG_DATA) public data: { user: any, favs: any }
   ) { }
 
-  /**
-   * update user data on backend, remove user data and token from localStorage, then redirect to {@link WelcomePageComponent}
-   */
+  ngOnInit(): void {
+    this.getUserFavs();
+  }
+
   updateUser(): void {
-    this.fetchApiData.editUser(this.userData).subscribe((result) => {
+    this.fetchApiData.editUser(this.userData.Username, this.userData).subscribe((result) => {
 
       localStorage.removeItem('token');
       localStorage.removeItem('user');
@@ -49,6 +44,7 @@ export class UserProfileComponent {
       window.open('/', '_self');
 
     }, (result) => {
+      console.log(this.favMovies);
       console.log(result);
       this.snackBar.open(result, 'OK', {
         duration: 4000
@@ -86,4 +82,10 @@ export class UserProfileComponent {
     this.dialogRef.close();
   }
 
+  getUserFavs(): any {
+    this.fetchApiData.getFavorites(this.data.user.username).subscribe((res: any) => {
+      this.favMovies = this.data.user.favouriteMovies;
+      return this.favMovies;
+    });
+  }
 }
