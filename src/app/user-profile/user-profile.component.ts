@@ -15,7 +15,7 @@ import { ApiDataService } from '../fetch-api-data.service';
 })
 export class UserProfileComponent {
 
-  @Input() userData = { username: this.data.user.username, password: '', email: this.data.user.email, birthday: (this.data.user.birthday ? this.data.user.birthday.split('T')[0] : undefined) };
+  @Input() userData = { username: this.data.user.username, password: '', email: this.data.user.email, birthday: this.data.user.birthday };
   favMovies: any[] = [];
 
   constructor(
@@ -60,7 +60,7 @@ export class UserProfileComponent {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
 
-      let successMessage = 'Sucessfully deleted account. Logging out...' // 'Success: ' + result;
+      let successMessage = 'Sucessfully deleted account. Logging out...'
       this.snackBar.open(successMessage, '', {
         duration: 2000
       });

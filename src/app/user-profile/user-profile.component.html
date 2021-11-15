@@ -29,17 +29,13 @@
                     <button mat-raised-button color="primary">
                         Synopsis
                     </button>
-                    <!-- <button mat-icon-button color="warn">
-                        <mat-icon *ngIf="isFav(movie._id)">favorite</mat-icon>
-                        <mat-icon *ngIf="!isFav(movie._id)">favorite_border</mat-icon>
-                    </button> -->
                 </mat-card-actions>
             </mat-card>
         </div>
     </mat-card-content>
 
     <mat-card-content>
-        <h2>Edit user data</h2>
+        <h2>Change your user data:</h2>
         <form>
             <mat-form-field class="form-field">
                 <input matInput [(ngModel)]="userData.username" placeholder='Username' type="text" name="Username"

@@ -33,12 +33,13 @@ export class ApiDataService {
         `Error body is: ${error.error}`);
     }
     return throwError(
-      'Something bad happened; please try again later.');
+      'An error occured; please try again later or check your username and password.');
   }
 
   public userLogin(userData: any): Observable<any> {
     console.log(userData);
     return this.http.post(apiUrl + 'login', userData).pipe(
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -142,12 +143,14 @@ export class ApiDataService {
     );
   }
 
-  deleteUser(): Observable<any> {
-    return this.http.delete(apiUrl + 'users/:username', {
+  public deleteUser(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const username = JSON.parse(localStorage.getItem('user') || '{}').username;
+    return this.http.delete(apiUrl + 'users/' + username, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
-        })
+        }), responseType: 'text' as const
     }).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
