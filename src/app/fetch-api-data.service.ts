@@ -69,25 +69,40 @@ export class ApiDataService {
     );
   }
 
-  getDirector(): Observable<any> {
-    return this.http.get(apiUrl + 'movies/Director/:name', {
-      headers: new HttpHeaders(
-        {
+  // getDirector(): Observable<any> {
+  //   return this.http.get(apiUrl + 'movies/Director/:name', {
+  //     headers: new HttpHeaders(
+  //       {
+  //         Authorization: 'Bearer ' + token,
+  //       })
+  //   }).pipe(
+  //     map(this.extractResponseData),
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  public getDirector(directorName: string): Observable<any> {
+    const response = this.http.get(
+      apiUrl + 'movies/Director/' + directorName,
+      {
+        headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
-        })
-    }).pipe(
+        }),
+      }
+    );
+    return response.pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
 
-  getGenre(): Observable<any> {
-    return this.http.get(apiUrl + 'movies/Genre/:name', {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        })
-    }).pipe(
+  public getGenre(genreName: string): Observable<any> {
+    const response = this.http.get(apiUrl + 'movies/Genre/' + genreName, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+      }),
+    });
+    return response.pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
     );

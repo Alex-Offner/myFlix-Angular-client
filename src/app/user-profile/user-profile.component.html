@@ -1,6 +1,8 @@
 <mat-card>
 
-    <mat-card-content (click)="close()" class="close">X</mat-card-content>
+    <button class="close" mat-icon-button [mat-dialog-close]="true">
+        <mat-icon>close</mat-icon>
+    </button>
 
     <mat-card-header class="header">
         <mat-card-title>Your profile</mat-card-title>

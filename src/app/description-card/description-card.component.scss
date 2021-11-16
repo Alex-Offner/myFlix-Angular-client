@@ -1,0 +1,12 @@
+.desciption-card {
+    padding: 0 20px;
+    position: relative;
+    button {
+      position: absolute;
+      top: -20px;
+      right: -12px;
+    }
+    button:hover {
+        opacity: 0.5;
+    }
+  }

@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { GenreCardComponent } from '../genre-card/genre-card.component';
+import { DirectorCardComponent } from '../director-card/director-card.component';
+import { DescriptionCardComponent } from '../description-card/description-card.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -13,9 +17,11 @@ import { UserProfileComponent } from '../user-profile/user-profile.component';
 export class MovieCardComponent {
   movies: any[] = [];
   user: { [key: string]: any } = {};
+  // favMovies: any[] = this.user.FavoriteMovies;
   constructor(
     public fetchApiData: ApiDataService,
     public dialog: MatDialog,
+    public router: Router,
     public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -44,11 +50,39 @@ export class MovieCardComponent {
   }
 
   viewProfile(): void {
-    // let favMoves = this.moves.filter(m => this.user.FavoriteMoves.includes(m._id));
+    // let favMovies = this.movies.filter(m => this.user.FavoriteMovies.includes(m._id));
     this.dialog.open(UserProfileComponent, {
       width: '480px',
       data: { user: this.user },
     });
     console.log(this.user);
+  }
+
+  openDesciptionCard(
+    title: string,
+    description: string
+  ): void {
+    this.dialog.open(DescriptionCardComponent, {
+      data: {
+        title,
+        description,
+      },
+      width: '500px',
+    });
+  }
+
+  openGenreCard(name: string, description: string): void {
+    this.dialog.open(GenreCardComponent, {
+      data: { name, description },
+      width: '500px',
+    });
+  }
+
+  openDirectorCard(name: string, bio: string): void {
+    this.dialog.open(DirectorCardComponent, {
+      data: { name, bio },
+      width: '500px',
+    });
+    console.log(this.movies)
   }
 }
