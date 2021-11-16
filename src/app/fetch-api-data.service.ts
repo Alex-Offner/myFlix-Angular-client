@@ -69,18 +69,6 @@ export class ApiDataService {
     );
   }
 
-  // getDirector(): Observable<any> {
-  //   return this.http.get(apiUrl + 'movies/Director/:name', {
-  //     headers: new HttpHeaders(
-  //       {
-  //         Authorization: 'Bearer ' + token,
-  //       })
-  //   }).pipe(
-  //     map(this.extractResponseData),
-  //     catchError(this.handleError)
-  //   );
-  // }
-
   public getDirector(directorName: string): Observable<any> {
     const response = this.http.get(
       apiUrl + 'movies/Director/' + directorName,
@@ -172,8 +160,20 @@ export class ApiDataService {
     );
   }
 
-  removeFavorites(MovieID: any): Observable<any> {
-    return this.http.delete(apiUrl + `users/:username/favouriteMovies/${MovieID}`, {
+  addToFavourites(user: any, _id: string): Observable<any> {
+    return this.http.post(apiUrl + `users/${user}/favouriteMovies/${_id}`, _id, {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
+  removeFromFavourites(user: any, _id: string): Observable<any> {
+    return this.http.delete(apiUrl + `users/${user}/favouriteMovies/${_id}`, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,

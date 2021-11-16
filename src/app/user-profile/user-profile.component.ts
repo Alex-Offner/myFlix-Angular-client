@@ -35,13 +35,13 @@ export class UserProfileComponent {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
 
-      let successMessage = 'Successfully updated. Redirecting to login...';
+      let successMessage = 'Successfully updated.';
       this.snackBar.open(successMessage, 'OK', {
         duration: 4000
       });
 
       this.dialogRef.close();
-      window.open('/', '_self');
+      // window.open('/', '_self');
 
     }, (result) => {
       console.log(this.userData);
@@ -51,9 +51,7 @@ export class UserProfileComponent {
       });
     });
   }
-  /**
-   * delete user account in backend and localStorage, then redirect to {@link WelcomePageComponent}
-   */
+
   deleteUser(): void {
     this.fetchApiData.deleteUser().subscribe((result) => {
 
@@ -87,5 +85,6 @@ export class UserProfileComponent {
       this.favMovies = this.data.user.favouriteMovies;
       return this.favMovies;
     });
+    console.log(this.favMovies);
   }
 }

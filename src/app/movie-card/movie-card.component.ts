@@ -16,8 +16,9 @@ import { DescriptionCardComponent } from '../description-card/description-card.c
 })
 export class MovieCardComponent {
   movies: any[] = [];
-  user: { [key: string]: any } = {};
-  // favMovies: any[] = this.user.FavoriteMovies;
+  user: any = JSON.parse(localStorage.getItem('user') || '');
+  favourites: any[] = [];
+
   constructor(
     public fetchApiData: ApiDataService,
     public dialog: MatDialog,
@@ -27,6 +28,7 @@ export class MovieCardComponent {
   ngOnInit(): void {
     this.getMovies();
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
+    this.getUserFavs();
   }
 
   getMovies(): void {
@@ -34,6 +36,34 @@ export class MovieCardComponent {
       this.movies = resp;
       console.log(this.movies);
       return this.movies;
+    });
+  }
+
+  getUserFavs(): void {
+    const user = localStorage.getItem('user');
+    this.fetchApiData.getUser().subscribe((res: any) => {
+      this.favourites = res.favouriteMovies
+      return this.favourites;
+    });
+    console.log(this.favourites);
+  }
+
+  addToFavourites(_id: string, Title: string): void {
+    this.fetchApiData.addToFavourites(this.user['username'], _id).subscribe((res: any) => {
+      this.snackBar.open(`${Title} has been added to your favourites`, 'OK', {
+        duration: 3000,
+      });
+      return this.getUserFavs();
+    });
+  }
+
+  removeFromFavourites(_id: string, Title: string): void {
+    this.fetchApiData.removeFromFavourites(this.user['username'], _id).subscribe((res: any) => {
+      this.snackBar.open(`${Title} has been removed from your favourites`, 'OK', {
+        duration: 3000,
+      });
+      window.location.reload();
+      return this.getUserFavs();
     });
   }
 
