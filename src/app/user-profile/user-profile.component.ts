@@ -16,7 +16,7 @@ import { ApiDataService } from '../fetch-api-data.service';
 export class UserProfileComponent {
 
   @Input() userData = { username: this.data.user.username, password: '', email: this.data.user.email, birthday: this.data.user.birthday };
-  favMovies: any[] = [];
+  favourites: any[] = [];
 
   constructor(
     public fetchApiData: ApiDataService,
@@ -27,6 +27,14 @@ export class UserProfileComponent {
 
   ngOnInit(): void {
     this.getUserFavs();
+  }
+
+  getUserFavs(): void {
+    this.fetchApiData.getUser().subscribe((res: any) => {
+      this.favourites = res.favouriteMovies
+      return this.favourites;
+    });
+    console.log(this.favourites)
   }
 
   updateUser(): void {
@@ -80,11 +88,4 @@ export class UserProfileComponent {
     this.dialogRef.close();
   }
 
-  getUserFavs(): any {
-    this.fetchApiData.getFavorites(this.data.user.username).subscribe((res: any) => {
-      this.favMovies = this.data.user.favouriteMovies;
-      return this.favMovies;
-    });
-    console.log(this.favMovies);
-  }
 }

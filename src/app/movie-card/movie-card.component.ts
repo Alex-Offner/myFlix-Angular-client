@@ -80,7 +80,7 @@ export class MovieCardComponent {
   }
 
   viewProfile(): void {
-    // let favMovies = this.movies.filter(m => this.user.FavoriteMovies.includes(m._id));
+    let favourites = this.movies.filter(m => this.user.favouriteMovies.includes(m._id));
     this.dialog.open(UserProfileComponent, {
       width: '480px',
       data: { user: this.user },
