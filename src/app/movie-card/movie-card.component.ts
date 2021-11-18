@@ -28,7 +28,6 @@ export class MovieCardComponent {
   ngOnInit(): void {
     this.getMovies();
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
-    this.getUserFavs();
   }
 
   getMovies(): void {
@@ -39,33 +38,24 @@ export class MovieCardComponent {
     });
   }
 
-  getUserFavs(): void {
-    const user = localStorage.getItem('user');
-    this.fetchApiData.getUser().subscribe((res: any) => {
-      this.favourites = res.favouriteMovies
-      return this.favourites;
-    });
-    console.log(this.favourites);
-  }
 
   addToFavourites(_id: string, Title: string): void {
     this.fetchApiData.addToFavourites(this.user['username'], _id).subscribe((res: any) => {
-      this.snackBar.open(`${Title} has been added to your favourites`, 'OK', {
+      this.snackBar.open(`${Title} has been added to your favourites.`, 'OK', {
         duration: 3000,
       });
-      return this.getUserFavs();
     });
   }
 
-  removeFromFavourites(_id: string, Title: string): void {
-    this.fetchApiData.removeFromFavourites(this.user['username'], _id).subscribe((res: any) => {
-      this.snackBar.open(`${Title} has been removed from your favourites`, 'OK', {
-        duration: 3000,
-      });
-      window.location.reload();
-      return this.getUserFavs();
-    });
-  }
+  // removeFromFavourites(_id: string, Title: string): void {
+  //   this.fetchApiData.removeFromFavourites(this.user['username'], _id).subscribe((res: any) => {
+  //     this.snackBar.open(`${Title} has been removed from your favourites`, 'OK', {
+  //       duration: 3000,
+  //     });
+  //     window.location.reload();
+  //     //  return this.getUserFavs();
+  //   });
+  // }
 
   logout(): void {
     this.user = [];
@@ -80,9 +70,9 @@ export class MovieCardComponent {
   }
 
   viewProfile(): void {
-    let favourites = this.movies.filter(m => this.user.favouriteMovies.includes(m._id));
     this.dialog.open(UserProfileComponent, {
-      width: '480px',
+      width: '500px',
+      height: '600px',
       data: { user: this.user },
     });
     console.log(this.user);

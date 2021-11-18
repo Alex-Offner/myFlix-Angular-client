@@ -31,13 +31,22 @@
                 color="primary">
                 Genre
             </button>
-            <button mat-raised-button (click)="addToFavourites(movie._id, movie.Title)" color="primary">
+
+        </mat-card-actions>
+        <mat-card-actions>
+            <button class="favorite-button" mat-icon-button (click)="addToFavourites(movie._id, movie.Title)"
+                color="warn" aria-label="Add movie to favorites button">
+                Add
+                <mat-icon>
+                    favorite
+                </mat-icon>
+            </button>
+            <!-- <button mat-raised-button (click)="addToFavourites(movie._id, movie.Title)" color="primary">
                 Add Movie
             </button>
             <button mat-raised-button (click)="removeFromFavourites(movie._id, movie.Title)" color="primary">
                 Remove Movie
-            </button>
-            <mat-icon>favorite_border</mat-icon>
+            </button> -->
         </mat-card-actions>
     </mat-card>
 </div>

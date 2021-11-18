@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="user-profile-modal">
 
     <button class="close" mat-icon-button [mat-dialog-close]="true">
         <mat-icon>close</mat-icon>
@@ -6,28 +6,39 @@
 
     <mat-card-header class="header">
         <mat-card-title>Your profile</mat-card-title>
-        <mat-card-subtitle>Username: {{data.user.username}}</mat-card-subtitle>
-        <mat-card-subtitle>Email: {{data.user.email}}</mat-card-subtitle>
-        <mat-card-subtitle>Birthday: {{data.user.birthday}}</mat-card-subtitle>
+        <mat-card-subtitle>Username: {{user.username}}</mat-card-subtitle>
+        <mat-card-subtitle>Email: {{user.email}}</mat-card-subtitle>
+        <mat-card-subtitle>Birthday: {{user.birthday}}</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
-        <p>Your favourite movies:</p>
-        <mat-card-subtitle>{{this.data.user.favouriteMovies}}</mat-card-subtitle>
-        <!-- <div class="favoriteMovies">
-            <div class="movie-container" *ngFor="let fav of favouriteMovies">
-                <h2>{{fav.Title}}</h2>
-                <img src={{fav.ImgPath}} />
-                <button mat-raised-button color="warn" (click)="removeFromFavs(fav._id, fav.Title)">Remove</button>
+        <mat-card-title class="header">Your favourite Movies:</mat-card-title>
+        <div class="favourites-container">
+            <div class="favourite-card">
+                <mat-card class="favourite" *ngFor="let favourite of favourites;">
+                    <img class="favourite-img" src={{favourite.ImagePath}} alt={{favourite.Title}} />
+                    <div class="favourite-title">
+                        <mat-card-title>{{favourite.Title}}</mat-card-title>
+                    </div>
+                    <button class="favorite-button" mat-icon-button
+                        (click)="removeFromFavourites(favourite._id, favourite.Title)" color="warn"
+                        aria-label="Remove movie from favourites button">
+                        Remove
+                        <mat-icon>
+                            favorite_border
+                        </mat-icon>
+                    </button>
+
+                </mat-card>
             </div>
-        </div> -->
+        </div>
     </mat-card-content>
 
     <mat-card-content>
         <h2>Change your user data:</h2>
         <form>
             <mat-form-field class="form-field">
-                <input matInput [(ngModel)]="userData.username" placeholder='Username' type="text" name="Username"
+                <input matInput [(ngModel)]="userData.username" placeholder='Username' type="text" name="username"
                     required>
             </mat-form-field>
             <mat-form-field class="form-field">
@@ -35,7 +46,7 @@
                     required>
             </mat-form-field>
             <mat-form-field class="form-field">
-                <input matInput [(ngModel)]="userData.email" type="email" placeholder='Email' name="Email" required>
+                <input matInput [(ngModel)]="user.email" type="email" placeholder='Email' name="Email" required>
             </mat-form-field>
             <mat-form-field class="form-field">
                 <input matInput [(ngModel)]="userData.birthday" type="date" placeholder='Birthday' name="Birthday">

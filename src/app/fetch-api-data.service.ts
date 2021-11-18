@@ -96,14 +96,12 @@ export class ApiDataService {
     );
   }
 
-  getUser(): Observable<any> {
-    return this.http.get(apiUrl + 'users/:username', {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
+  getUser(username: string): Observable<any> {
+    return this.http.get(apiUrl + 'users/' + username, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+      })
+    }).pipe(map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
