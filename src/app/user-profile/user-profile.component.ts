@@ -28,7 +28,6 @@ export class UserProfileComponent {
   ) { }
 
   ngOnInit(): void {
-    // this.getUserFavs();
     this.getUser();
   }
 
