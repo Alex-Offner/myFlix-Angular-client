@@ -1,27 +1,27 @@
 # MyFlixAngularClient
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.1.
+This project is a second client for the myFlix application. It was written in Angular (while the first installment was written with React). It access an existing server-side, including a database and REST API, hosted on Heroku. For further information on the API look at this [GitHub repository](https://github.com/Alex-Offner/movie_api). 
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Tech Stack
 
-## Code scaffolding
+- Angular
+- Angular Meterial
+- Mongo DB
+- Express
+- Node
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Key Features
 
-## Build
+- Upon opening the app the user will see a Welcome View than enables him to login, or create a user profile.
+- After logging in and authorisation the user will be redirected to a view of all movies available. 
+- Each movie has optional buttons to display it's decription, genre, director and an option to add the movie to their list of favourites. 
+- The user is will see a navbar at the top where he can select and see his user profile. All user data (except the password) is displayed here and can be changed. A list of all favourites movies can be seen here as well and they can be deleted. A button to delete the current user profile is available. 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Installing and running the app locally 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Download the code and run `npm install` to install all dependencies
+- Run `ng serve` in the project directory and navigate to `http://localhost:4200` in your browser to open the app. 
+- Run `ng build` to build the project. 
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
