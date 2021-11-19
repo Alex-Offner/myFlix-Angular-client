@@ -1,3 +1,8 @@
+/**
+ * The genre card allows users to see information of the genre of a movie. It can be accessed through the genre button on the movie card.
+ * @module GenreCardComponent
+ */
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 

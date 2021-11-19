@@ -1,3 +1,9 @@
+/**
+ * The movie-card shows all movies an a navbar. Users can navigate to their user profile as well as genre, director and description modals. 
+ * A logout button lets them log out.
+ * @module MovieCardComponent
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { ApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,6 +22,7 @@ import { DescriptionCardComponent } from '../description-card/description-card.c
 })
 export class MovieCardComponent {
   movies: any[] = [];
+  //Getting user info from localStorage if present
   user: any = JSON.parse(localStorage.getItem('user') || '');
   favourites: any[] = [];
 
@@ -30,6 +37,9 @@ export class MovieCardComponent {
     this.user = JSON.parse(localStorage.getItem('user') || '{}');
   }
 
+  /**
+ * Get all movies from database
+ */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -38,7 +48,9 @@ export class MovieCardComponent {
     });
   }
 
-
+  /**
+   * Send PUT request to users favouriteMovies
+   */
   addToFavourites(_id: string, Title: string): void {
     this.fetchApiData.addToFavourites(this.user['username'], _id).subscribe((res: any) => {
       this.snackBar.open(`${Title} has been added to your favourites.`, 'OK', {
@@ -47,16 +59,9 @@ export class MovieCardComponent {
     });
   }
 
-  // removeFromFavourites(_id: string, Title: string): void {
-  //   this.fetchApiData.removeFromFavourites(this.user['username'], _id).subscribe((res: any) => {
-  //     this.snackBar.open(`${Title} has been removed from your favourites`, 'OK', {
-  //       duration: 3000,
-  //     });
-  //     window.location.reload();
-  //     //  return this.getUserFavs();
-  //   });
-  // }
-
+  /**
+   * Logout user and delete local storage
+   */
   logout(): void {
     this.user = [];
     localStorage.removeItem('token');
@@ -69,6 +74,9 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+ * Navigate to the user-profile 
+ */
   viewProfile(): void {
     this.dialog.open(UserProfileComponent, {
       width: '500px',
@@ -78,6 +86,9 @@ export class MovieCardComponent {
     console.log(this.user);
   }
 
+  /**
+ * Navigate to Desciption-card
+ */
   openDesciptionCard(
     title: string,
     description: string
@@ -91,6 +102,9 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+ * Navigate to Genre-card
+ */
   openGenreCard(name: string, description: string): void {
     this.dialog.open(GenreCardComponent, {
       data: { name, description },
@@ -98,6 +112,9 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Navigate to Director-card
+   */
   openDirectorCard(name: string, bio: string): void {
     this.dialog.open(DirectorCardComponent, {
       data: { name, bio },

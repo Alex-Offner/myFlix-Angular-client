@@ -1,3 +1,9 @@
+/**
+ * The desciption card allows users to see information of the movie. It can be accessed through the desciption button on the movie card.
+ * @module DescriptionCardComponent
+ */
+
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 

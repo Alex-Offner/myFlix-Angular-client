@@ -1,3 +1,8 @@
+/**
+ * user-profile lets users eddit, delete or remove movies from their list of favourites
+ * @module ProfileEditComponent
+ */
+
 import { Component, Input, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'; // to receive data from move-card
 // to close the dialog on success
@@ -31,7 +36,9 @@ export class UserProfileComponent {
     this.getUser();
   }
 
-
+  /**
+   * Get user from API and call getMovies function
+   */
   getUser(): void {
     this.fetchApiData.getUser(this.data.user.username).subscribe((resp: any) => {
       this.user = resp;
@@ -41,6 +48,9 @@ export class UserProfileComponent {
     });
   }
 
+  /**
+ * Get movies from API
+ */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -50,6 +60,9 @@ export class UserProfileComponent {
     });
   }
 
+  /**
+ * Filters movie list with list of favourites of a user
+ */
   filterFavouirites(): any {
     this.favourites = this.movies.filter((movie: any) =>
       this.user.favouriteMovies.includes(movie._id)
@@ -57,6 +70,9 @@ export class UserProfileComponent {
     return this.favourites;
   }
 
+  /**
+ * Removes a movie from a users list of favourites
+ */
   removeFromFavourites(_id: string, Title: string): void {
     this.fetchApiData.removeFromFavourites(this.user['username'], _id).subscribe((res: any) => {
       this.snackBar.open(`${Title} has been removed from your favourites`, 'OK', {
@@ -66,6 +82,9 @@ export class UserProfileComponent {
     });
   }
 
+  /**
+ * A put request to change the user data
+ */
   updateUser(): void {
     this.fetchApiData.editUser(this.userData.username, this.userData).subscribe((result) => {
 
@@ -88,6 +107,9 @@ export class UserProfileComponent {
     });
   }
 
+  /**
+ * Delete a user from the database and remove local storage items
+ */
   deleteUser(): void {
     this.fetchApiData.deleteUser().subscribe((result) => {
 

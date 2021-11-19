@@ -19,6 +19,9 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent {
 
+  /**
+ * This decorator binds the form input values to the userCredentials object
+ */
   @Input() userCredentials = { username: '', password: '' };
 
   constructor(
@@ -30,6 +33,10 @@ export class LoginFormComponent {
   ngOnInit(): void {
   }
 
+  /**
+   * Logs users into the heroku hosted api. User recieves a token and his user information. 
+   * A popup shows a message about the result of the request.
+   */
   login(): void {
     this.fetchApiData.userLogin(this.userCredentials).subscribe((result) => {
 

@@ -159,7 +159,7 @@ export class ApiDataService {
   }
 
   addToFavourites(user: any, _id: string): Observable<any> {
-    return this.http.post(apiUrl + `users/${user}/favouriteMovies/${_id}`, _id, {
+    return this.http.post(apiUrl + `users/${user}/favouriteMovies/${_id}`, {}, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
