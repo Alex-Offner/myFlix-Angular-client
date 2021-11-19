@@ -2,6 +2,8 @@
 
 This project is a second client for the myFlix application. It was written in Angular (while the first installment was written with React). It access an existing server-side, including a database and REST API, hosted on Heroku. For further information on the API look at this [GitHub repository](https://github.com/Alex-Offner/movie_api). 
 
+![angular doc](https://user-images.githubusercontent.com/80695644/142670766-463aad11-7675-4b02-831d-eadc56c15096.PNG)
+
 
 ## Tech Stack
 
