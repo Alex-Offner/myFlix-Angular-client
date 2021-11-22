@@ -58,7 +58,6 @@ export class UserProfileComponent {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       this.filterFavouirites();
-      console.log(this.movies);
       return this.movies;
     });
   }
@@ -79,9 +78,11 @@ export class UserProfileComponent {
   removeFromFavourites(_id: string, Title: string): void {
     this.fetchApiData.removeFromFavourites(this.user['username'], _id).subscribe((res: any) => {
       this.snackBar.open(`${Title} has been removed from your favourites`, 'OK', {
+        panelClass: 'snackBar-class',
         duration: 3000,
       });
-      window.location.reload();
+      this.getUser();
+      // window.location.reload();
     });
   }
 
@@ -95,6 +96,7 @@ export class UserProfileComponent {
       // localStorage.setItem('user', JSON.parse(res));
       let successMessage = 'Successfully updated. Please log in again to see the changes you made.';
       this.snackBar.open(successMessage, 'OK', {
+        panelClass: 'snackBar-class',
         duration: 4000
       });
 
@@ -121,6 +123,7 @@ export class UserProfileComponent {
 
         let successMessage = 'Sucessfully deleted account. Logging out...'
         this.snackBar.open(successMessage, '', {
+          panelClass: 'snackBar-class',
           duration: 2000
         });
 

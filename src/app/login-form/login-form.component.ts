@@ -47,6 +47,7 @@ export class LoginFormComponent {
 
       let successMessage = 'Successfully logged in ' + result.user.username;
       this.snackBar.open(successMessage, 'OK', {
+        panelClass: 'snackBar-class',
         duration: 2000
       });
       this.router.navigate(['movies']);

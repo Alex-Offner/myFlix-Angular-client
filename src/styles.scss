@@ -81,3 +81,10 @@ body {
   background-color: #fff;
   margin: 10px;
 }
+
+.snackBar-class {
+  color: white;
+  .mat-simple-snackbar-action {
+    color: #246edd;
+  }
+}

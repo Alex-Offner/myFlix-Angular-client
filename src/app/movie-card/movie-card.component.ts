@@ -43,7 +43,7 @@ export class MovieCardComponent {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
+      // console.log(this.movies);
       return this.movies;
     });
   }
@@ -54,6 +54,7 @@ export class MovieCardComponent {
   addToFavourites(_id: string, Title: string): void {
     this.fetchApiData.addToFavourites(this.user['username'], _id).subscribe((res: any) => {
       this.snackBar.open(`${Title} has been added to your favourites.`, 'OK', {
+        panelClass: 'snackBar-class',
         duration: 3000,
       });
     });
@@ -70,6 +71,7 @@ export class MovieCardComponent {
 
     let successMessage = 'Successfully logged out.'
     this.snackBar.open(successMessage, 'OK', {
+      panelClass: 'snackBar-class',
       duration: 4000
     });
   }
