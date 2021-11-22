@@ -18,12 +18,13 @@ import { ApiDataService } from '../fetch-api-data.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
+
 export class UserProfileComponent {
 
-  @Input() userData = { username: this.data.user.username, password: '', email: this.data.user.email, birthday: this.data.user.birthday };
   favourites: any[] = [];
   user: any = {};
   movies: any[] = [];
+  @Input() userData = { username: this.user.username, password: '', email: this.user.email, birthday: this.user.birthday };
 
   constructor(
     public fetchApiData: ApiDataService,
@@ -31,6 +32,8 @@ export class UserProfileComponent {
     public snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: { user: any }
   ) { }
+
+
 
   ngOnInit(): void {
     this.getUser();
@@ -40,11 +43,11 @@ export class UserProfileComponent {
    * Get user from API and call getMovies function
    */
   getUser(): void {
-    this.fetchApiData.getUser(this.data.user.username).subscribe((resp: any) => {
+    const currentUser = JSON.parse(localStorage.getItem('user')!);
+    this.fetchApiData.getUser(currentUser.username).subscribe((resp: any) => {
       this.user = resp;
+      // this.userData = resp;
       this.getMovies();
-      console.log(resp);
-      console.log(this.favourites);
     });
   }
 
@@ -86,11 +89,10 @@ export class UserProfileComponent {
  * A put request to change the user data
  */
   updateUser(): void {
-    this.fetchApiData.editUser(this.userData.username, this.userData).subscribe((result) => {
-
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-
+    this.fetchApiData.editUser(this.userData.username, this.userData).subscribe((res) => {
+      // localStorage.removeItem('token');
+      // localStorage.removeItem('user');
+      // localStorage.setItem('user', JSON.parse(res));
       let successMessage = 'Successfully updated. Please log in again to see the changes you made.';
       this.snackBar.open(successMessage, 'OK', {
         duration: 4000
@@ -98,10 +100,10 @@ export class UserProfileComponent {
 
       this.dialogRef.close();
 
-    }, (result) => {
+    }, (res) => {
       console.log(this.userData);
-      console.log(result);
-      this.snackBar.open(result, 'OK', {
+      console.log(res);
+      this.snackBar.open(res, 'OK', {
         duration: 4000
       });
     });
@@ -111,31 +113,32 @@ export class UserProfileComponent {
  * Delete a user from the database and remove local storage items
  */
   deleteUser(): void {
-    this.fetchApiData.deleteUser().subscribe((result) => {
+    if (confirm('Are you sure you want to delete your profile?')) {
+      this.fetchApiData.deleteUser().subscribe((result) => {
 
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
 
-      let successMessage = 'Sucessfully deleted account. Logging out...'
-      this.snackBar.open(successMessage, '', {
-        duration: 2000
+        let successMessage = 'Sucessfully deleted account. Logging out...'
+        this.snackBar.open(successMessage, '', {
+          duration: 2000
+        });
+
+        setTimeout(() => {
+          this.dialogRef.close();
+          window.open('/', '_self');
+        }, 2000);
+
+      }, (result) => {
+        console.log(result);
+        this.snackBar.open(result, 'OK', {
+          duration: 4000
+        });
       });
-
-      setTimeout(() => {
-        this.dialogRef.close();
-        window.open('/', '_self');
-      }, 2000);
-
-    }, (result) => {
-      console.log(result);
-      this.snackBar.open(result, 'OK', {
-        duration: 4000
-      });
-    });
+    }
   }
 
   close(): void {
     this.dialogRef.close();
   }
-
 }

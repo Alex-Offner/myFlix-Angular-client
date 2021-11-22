@@ -38,15 +38,16 @@
         <h2>Change your user data:</h2>
         <form>
             <mat-form-field class="form-field">
-                <input matInput [(ngModel)]="userData.username" placeholder='Username' type="text" name="username"
+                <input matInput [(ngModel)]="userData.username" placeholder='username' type="text" name="username"
                     required>
             </mat-form-field>
+            <p class="warning">Username can't be changed. Please type in your current one!</p>
             <mat-form-field class="form-field">
                 <input matInput [(ngModel)]="userData.password" type="password" placeholder="Password" name="Password"
                     required>
             </mat-form-field>
             <mat-form-field class="form-field">
-                <input matInput [(ngModel)]="user.email" type="email" placeholder='Email' name="Email" required>
+                <input matInput [(ngModel)]="userData.email" type="email" placeholder='Email' name="Email" required>
             </mat-form-field>
             <mat-form-field class="form-field">
                 <input matInput [(ngModel)]="userData.birthday" type="date" placeholder='Birthday' name="Birthday">
