@@ -1,3 +1,9 @@
+
+/**
+ * The director-card allows users to view information about the director. It is opened upon clicking the director button on the movie-card.
+ * @module DirectorCardComponent
+ */
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -17,7 +23,5 @@ export class DirectorCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    console.log(this.data.name)
   }
 }

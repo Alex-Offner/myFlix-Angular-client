@@ -22,6 +22,6 @@ export class GenreCardComponent implements OnInit {
   ) { }
 
 
-  ngOnInit(): void { console.log(this.data.name) }
+  ngOnInit(): void { }
 
 }

@@ -33,11 +33,11 @@ export class ApiDataService {
         `Error body is: ${error.error}`);
     }
     return throwError(
-      'An error occured; please try again later or check your username and password.');
+      'An error occured; please try again later.');
   }
 
   public userLogin(userData: any): Observable<any> {
-    console.log(userData);
+    // console.log(userData);
     return this.http.post(apiUrl + 'login', userData).pipe(
       map(this.extractResponseData),
       catchError(this.handleError)
@@ -97,9 +97,12 @@ export class ApiDataService {
   }
 
   getUser(username: string): Observable<any> {
+    //Setting a second variable for the token here, so it gets called a little later again and can be used at the getUser function
+    const token2 = localStorage.getItem('token');
+
     return this.http.get(apiUrl + 'users/' + username, {
       headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
+        Authorization: 'Bearer ' + token2,
       })
     }).pipe(map(this.extractResponseData),
       catchError(this.handleError)

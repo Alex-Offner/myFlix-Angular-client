@@ -85,7 +85,6 @@ export class MovieCardComponent {
       height: '600px',
       data: { user: this.user },
     });
-    console.log(this.user);
   }
 
   /**
@@ -122,6 +121,5 @@ export class MovieCardComponent {
       data: { name, bio },
       width: '500px',
     });
-    console.log(this.movies)
   }
 }
